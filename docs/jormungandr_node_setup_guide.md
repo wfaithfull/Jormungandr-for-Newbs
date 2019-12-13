@@ -734,6 +734,40 @@ alias claer="clear"
 f() { find . -iname "*$1*"; }
 ```
 
+# Doing the pull request
+
+Go to https://github.com/cardano-foundation/incentivized-testnet-stakepool-registry and click 'Fork'
+
+Check out your forked copy of the repository.
+
+Go onto the server. Type `cat ~/files/receiver_public.key`. Copy the output. This is your public key value.
+
+In `/registry`, you need to create two files. The names of these files are
+
+`<YOUR_PUBLIC_KEY>.json`
+`<YOUR_PUBLIC_KEY>.sig`
+
+Create those files. We will fill them in a second.
+
+```
+{
+  "owner": "<YOUR_PUBLIC_KEY>",
+  "name": "<You make this up, e.g. FaithPool>",
+  "ticker": "<You make this up, e.g. FAITH>",
+  "homepage": "<The address of your pool. Should have a static site on it if possible, e.g. https://pool.faithfull.me>",
+  "pledge_address": "<Your pool pledge address, this is the contents of the ~/files/receiver_account.txt>"
+}
+```
+Once you've made this file, copy it to the server. Then on the server run 
+
+```
+jcli key sign --secret-key receiver_secret.key <JSON_FILE_YOU_JUST_COPIED>
+```
+
+Copy the output, and paste it into the <YOUR_PUBLIC_KEY>.sig file.
+
+Your PR is ready.
+
 # You finished! Buy me a beer?
 ```
 DdzFFzCqrhsjtq9YsgFKeWABaC62QdnPSrsz4GHg762R9qE86YwQTrkCYtMEUtWgb5aEsRbqHAj6Gztdw3BJMKVrCDQbf8HKc9SsnvVk
