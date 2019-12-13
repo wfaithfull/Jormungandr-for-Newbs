@@ -564,12 +564,17 @@ usage: ~/files/delegate-account.sh <STAKE_POOL_ID> <REST-LISTEN-PORT> <ACCOUNT-S
 # This may take a minute or two to finish
 ~/files/createStakePool.sh ${REST_PORT} <TAX VALUE> <TAX RATIO> <TAX LIMIT> $(cat ~/files/receiver_secret.key)
 
+# Here's some sample values - 3600 ADA fixed fee (about £100), 5% thereafter, and a limit of 1m ADA.
+# You can change these later.
+~/files/createStakePool.sh ${REST_PORT} 3600 "1/20" 1000000 $(cat ~/files/receiver_secret.key)
+
 # Move node_secret & stake_pool.id to ~/files
 mv node_secret.yaml ~/files && mv stake_pool.id ~/files
 ```
 
 ### Check that your stake pool is visible
 ```
+# This will return nothing but a good exit code if successful. Check that is_pool_visible && &?
 is_pool_visible
 ```
 
